@@ -1,0 +1,6 @@
+[LocalRepository-Mysqlselinux]
+name=RL9 - Local Mysql-selinux Repository
+metadata_expire=-1
+gpgcheck=0
+enabled=1
+baseurl=http://10.10.10.200:8080/mysql-selinux
