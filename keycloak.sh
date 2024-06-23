@@ -58,7 +58,10 @@ export KEYCLOAK_ADMIN=admin
 export KEYCLOAK_ADMIN_PASSWORD=Spart-08
 
 /opt/keycloak/keycloak-25.0.1/bin/kc.sh build
-/opt/keycloak/keycloak-25.0.1/bin/kc.sh start
+#/opt/keycloak/keycloak-25.0.1/bin/kc.sh start
 
-
+systemctl daemon-reload
+systemctl start keycloak
+systemctl enable keycloak
+systemctl status keycloak
 
