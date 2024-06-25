@@ -1,0 +1,6 @@
+[LocalRepository-Java21openjdk]
+name=RL9 - Local Java21openjdk Repository
+metadata_expire=-1
+gpgcheck=0
+enabled=1
+baseurl=http://10.10.10.200:8080/java-21-openjdk

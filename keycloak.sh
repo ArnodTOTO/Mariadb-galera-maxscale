@@ -1,4 +1,5 @@
 #!/bin/bash
+#url: https://itdraft.ru/2022/08/29/ustanovka-keycloak-i-postgesql-v-linux-centos-rocky-debian/
 #hostnamectl set-hostname keycloak.technobrain.com
 
 #git clone https://github.com/ArnodTOTO/Mariadb-galera-maxscale.git
@@ -19,21 +20,6 @@ chown -R keycloak. keycloak
 chmod o+x /opt/keycloak/keycloak-25.0.1/bin/
 
 dnf -y install java-21-openjdk
-
-dnf install -y postgresql-server glibc-all-langpacks
-
-postgresql-setup --initdb
-systemctl start postgresql
-systemctl enable postgresql
-
-su postgres << EOF
-psql
-create user keycloak with password 'keycloak';
-create database keycloak owner keycloak;
-grant all privileges on database keycloak to keycloak;
-\q
-exit
-EOF
 
 #vim /var/lib/pgsql/data/pg_hba.conf
 mv /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf.old
@@ -59,6 +45,8 @@ export KEYCLOAK_ADMIN_PASSWORD=Spart-08
 
 /opt/keycloak/keycloak-25.0.1/bin/kc.sh build
 #/opt/keycloak/keycloak-25.0.1/bin/kc.sh start
+
+#keycloak.service
 
 systemctl daemon-reload
 systemctl start keycloak
