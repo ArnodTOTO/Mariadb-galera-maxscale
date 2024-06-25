@@ -1,0 +1,6 @@
+[LocalRepository-Maxscale]
+name=RL9 - Local Maxscale Repository
+metadata_expire=-1
+gpgcheck=0
+enabled=1
+baseurl=http://10.10.10.200:8080/maxscale

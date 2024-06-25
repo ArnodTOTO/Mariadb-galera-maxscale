@@ -45,6 +45,15 @@ repotrack --downloaddir=$PWD java-21-openjdk
 createrepo $PWD
 
 
+######### download mariadb-tools #######
+cd ../
+mkdir maxscale
+cd maxscale
+repotrack --downloaddir=$PWD maxscale
+createrepo $PWD
+
+
+
 ######## Configure BDD1 ########
 dnf install -y sshpass
 #sshpass -p root ssh -o StrictHostKeyChecking=no root@BDD1 << EOF
