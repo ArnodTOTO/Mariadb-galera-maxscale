@@ -3,6 +3,8 @@
 #hostnamectl set-hostname keycloak.technobrain.com
 
 #git clone https://github.com/ArnodTOTO/Mariadb-galera-maxscale.git
+export KEYCLOAK_ADMIN=admin
+export KEYCLOAK_ADMIN_PASSWORD=Spart-08
 
 echo "10.10.10.200 Depot Depot.technobrain.com" >> /etc/hosts
 echo "10.10.10.1 BDD1 BDD1.technobrain.com" >> /etc/hosts
@@ -57,8 +59,6 @@ sshpass -p toto scp toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/keycloa
 firewall-cmd --permanent --zone=public --add-port=8443/tcp
 firewall-cmd --reload
 
-export KEYCLOAK_ADMIN=admin
-export KEYCLOAK_ADMIN_PASSWORD=Spart-08
 
 /opt/keycloak/keycloak-25.0.1/bin/kc.sh build
 #/opt/keycloak/keycloak-25.0.1/bin/kc.sh start
