@@ -64,8 +64,6 @@ repotrack --downloaddir=$PWD maxscale
 createrepo $PWD
 
 
-
-######## Configure BDD1 ########
 dnf install -y sshpass
 #sshpass -p root ssh -o StrictHostKeyChecking=no root@BDD1 << EOF
 #mkdir -p /etc/yum.repos.d/old
@@ -84,18 +82,61 @@ EOF
 ######## Create http server in python ######## 
 cd /home/toto/
 sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@BDD1:~/
-sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@BDD2:~/
-sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@BDD3:~/
-sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@maxscale:~/
-sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@keycloak:~/
+sshpass -p toto scp Mariadb-galera-maxscale/deploiement_BDD1.sh toto@BDD1:~/
 
+sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@BDD2:~/
+sshpass -p toto scp Mariadb-galera-maxscale/compl-BDD2.sh toto@BDD2:~/
+
+sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@BDD3:~/
+sshpass -p toto scp Mariadb-galera-maxscale/compl-BDD3.sh toto@BDD3:~/
+
+sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@maxscale:~/
+sshpass -p toto scp Mariadb-galera-maxscale/maxscale.sh toto@maxscale:~/
+
+sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@keycloak:~/
+sshpass -p toto scp Mariadb-galera-maxscale/keycloak.sh toto@keycloak:~/
 
 cd repos/
 systemctl stop firewalld.service
-python3 -m http.server 8080
+python3 -m http.server 8080 &
+sleep 2
 
+############## launch BDD1 ###############
+sshpass -p root ssh -o StrictHostKeyChecking=no root@BDD1 << EOF
+cd /home/toto
+chmod +x deploiement_BDD1.sh
+./deploiement_BDD1.sh
+exit
+EOF
 
+############## launch BDD2 ###############
+sshpass -p root ssh -o StrictHostKeyChecking=no root@BDD2 << EOF
+cd /home/toto
+chmod +x compl-BDD2.sh
+./compl-BDD2.sh
+exit
+EOF
 
+############## launch BDD3 ###############
+sshpass -p root ssh -o StrictHostKeyChecking=no root@BDD3 << EOF
+cd /home/toto
+chmod +x compl-BDD3.sh
+./compl-BDD3.sh
+exit
+EOF
 
+############## launch maxscale ###############
+sshpass -p root ssh -o StrictHostKeyChecking=no root@maxscale << EOF
+cd /home/toto
+chmod +x maxscale.sh
+./maxscale.sh
+exit
+EOF
 
-
+############## launch BDD2 ###############
+sshpass -p root ssh -o StrictHostKeyChecking=no root@keycloak << EOF
+cd /home/toto
+chmod +x keycloak.sh
+./keycloak.sh
+exit
+EOF
