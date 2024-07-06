@@ -59,7 +59,7 @@ sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env/env_password_maxsca
 sshpass -p ${password_root} scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/keycloak.sh root@keycloak:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/private/* root@keycloak:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/keycloak/* root@keycloak:~/
-sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env_password_keycloak root@keycloak:~/
+sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env/env_password_keycloak root@keycloak:~/
 
 #cd repos/
 #systemctl stop firewalld.service
