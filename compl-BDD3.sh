@@ -11,7 +11,7 @@ firewall-cmd --reload
 
 dnf update -y
 dnf install -y sshpass
-wget https://dlm.mariadb.com/3820095/MariaDB/mariadb-11.2.4/yum/rhel/mariadb-11.2.4-rhel-9-x86_64-rpms.tar
+sshpass -p toto scp -o StrictHostKeyChecking=no toto@Depot.technobrain.com:~/mariadb-11.2.4-rhel-9-x86_64-rpms.tar ./
 tar xvf mariadb-11.2.4-rhel-9-x86_64-rpms.tar 
 cd mariadb-11.2.4-rhel-9-x86_64-rpms/
 ./setup_repository
@@ -23,7 +23,7 @@ sshpass -p toto scp -o StrictHostKeyChecking=no toto@Depot.technobrain.com:~/Mar
 
 systemctl enable --now mariadb
 
-mysql -u root -p "Spart-08" << EOF
+mysql -u root -pSpart-08 << EOF
 show global status like 'wsrep_cluster_size';
 exit
 EOF
