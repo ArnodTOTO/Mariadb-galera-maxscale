@@ -61,6 +61,7 @@ sshpass -p ${password_root} scp  Mariadb-galera-maxscale/keycloak/* root@maxscal
 
 ############## launch BDD1 ###############
 sshpass -p ${password_root} ssh -o StrictHostKeyChecking=no root@BDD1 << EOF
+chmod 600 private_key.pem
 cd /home/toto
 chmod +x ~/deploiement_BDD1.sh
 ./root/deploiement_BDD1.sh
@@ -69,6 +70,7 @@ EOF
 
 ############## launch BDD2 ###############
 sshpass -p ${password_root} ssh -o StrictHostKeyChecking=no root@BDD2 << EOF
+chmod 600 private_key.pem
 cd /home/toto
 chmod +x ~/compl-BDD2.sh
 ./root/compl-BDD2.sh
@@ -77,6 +79,7 @@ EOF
 
 ############## launch BDD3 ###############
 sshpass -p ${password_root} ssh -o StrictHostKeyChecking=no root@BDD3 << EOF
+chmod 600 private_key.pem
 cd /home/toto
 chmod +x ~/compl-BDD3.sh
 ./root/compl-BDD3.sh
@@ -85,6 +88,7 @@ EOF
 
 ############## launch maxscale ###############
 sshpass -p ${password_root} ssh -o StrictHostKeyChecking=no root@maxscale << EOF
+chmod 600 private_key.pem
 cd /home/toto
 chmod +x ~/maxscale.sh
 ./root/maxscale.sh
@@ -93,6 +97,7 @@ EOF
 
 ############## launch BDD2 ###############
 sshpass -p ${password_root} ssh -o StrictHostKeyChecking=no root@keycloak << EOF
+chmod 600 private_key.pem
 cd /home/toto
 chmod +x ~/keycloak.sh
 ./root/keycloak.sh
