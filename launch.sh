@@ -10,7 +10,7 @@
 #git clone https://github.com/ArnodTOTO/Mariadb-galera-maxscale.git
 
 
-source /root/env_password_launch
+source ./env_password_launch
 
 echo "10.10.10.1 BDD1 BDD1.technobrain.com" >> /etc/hosts
 echo "10.10.10.2 BDD2 BDD2.technobrain.com" >> /etc/hosts
