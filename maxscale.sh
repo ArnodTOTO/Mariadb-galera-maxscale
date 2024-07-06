@@ -13,7 +13,7 @@ dnf install -y sshpass
 curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | bash
 dnf install -y maxscale
 
-sshpass -p "toto" ssh -o StrictHostKeyChecking=no -T toto@BDD1 << 'EOF1'
+sshpass -p ${password_toto} ssh -o StrictHostKeyChecking=no -T toto@BDD1 << 'EOF1'
 mysql -u root -p${root_pass_mysql} << 'EOF2'
 show global status like 'wsrep_cluster_size';
 create user 'maxscale'@'%' identified by '${maxscale_pass}';

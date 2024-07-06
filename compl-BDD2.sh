@@ -25,7 +25,7 @@ sshpass -p ${password_toto} scp -o StrictHostKeyChecking=no toto@Depot.technobra
 
 systemctl enable --now mariadb
 
-mysql -u root -p{root_pass_msyql} << EOF
+mysql -u root -p${root_pass_msyql} << EOF
 show global status like 'wsrep_cluster_size';
 exit
 EOF
