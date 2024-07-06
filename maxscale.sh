@@ -5,14 +5,10 @@ echo "10.10.10.3 BDD3 BDD3.technobrain.com" >> /etc/hosts
 echo "10.10.10.200 Depot Depot.technobrain.com" >> /etc/hosts
 
 
-mkdir -p /etc/yum.repos.d/old
-mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/old/
-
-mv /home/toto/*.repo /etc/yum.repos.d/
-
 
 dnf update -y
 dnf install -y sshpass
+curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | bash
 dnf install -y maxscale
 
 sshpass -p "toto" ssh -o StrictHostKeyChecking=no -T toto@BDD1 << 'EOF1'

@@ -7,13 +7,14 @@ echo "10.10.10.200 Depot Depot.technobrain.com" >> /etc/hosts
 firewall-cmd --permanent --add-service=galera
 firewall-cmd --reload
 
-mkdir -p /etc/yum.repos.d/old
-mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/old/
-
-mv /home/toto/*.repo /etc/yum.repos.d/
 
 dnf update -y
 dnf install -y sshpass
+wget https://dlm.mariadb.com/3820095/MariaDB/mariadb-11.2.4/yum/rhel/mariadb-11.2.4-rhel-9-x86_64-rpms.tar
+tar xvf mariadb-11.2.4-rhel-9-x86_64-rpms.tar 
+cd mariadb-11.2.4-rhel-9-x86_64-rpms/
+./setup_repository
+
 dnf install -y mariadb-server
 
 #mv /etc/my.cnf.d/galera.cnf /etc/my.cnf.d/galera.cnf.old

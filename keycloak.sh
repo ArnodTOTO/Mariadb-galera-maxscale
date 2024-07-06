@@ -9,11 +9,6 @@ export KEYCLOAK_ADMIN_PASSWORD=Spart-08
 echo "10.10.10.200 Depot Depot.technobrain.com" >> /etc/hosts
 echo "10.10.10.1 BDD1 BDD1.technobrain.com" >> /etc/hosts
 
-mkdir -p /etc/yum.repos.d/old
-mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/old/
-
-mv /home/toto/*.repo /etc/yum.repos.d/
-
 dnf update -y
 dnf install -y sshpass
 
