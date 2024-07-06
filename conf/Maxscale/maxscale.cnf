@@ -27,7 +27,7 @@ type=monitor
 module=mariadbmon
 servers=BDD1,BDD2,BDD3
 user=maxscale
-password=123
+password=Maxadmin-69
 
 [Galera-Service]
 type=service

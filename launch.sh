@@ -41,6 +41,7 @@ sshpass -p ${password_root} scp  Mariadb-galera-maxscale/private/* root@BDD1:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env/env_password_BDD root@BDD1:~/
 
 
+
 sshpass -p ${password_root} scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/compl-BDD2.sh root@BDD2:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/private/* root@BDD2:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env/env_password_BDD root@BDD2:~/

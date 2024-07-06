@@ -21,7 +21,7 @@ mkdir -p /opt/keycloak
 cd /opt/keycloak
 #wget https://github.com/keycloak/keycloak/releases/download/25.0.1/keycloak-25.0.1.zip
 
-sshpass -p ${password_toto} scp -o StrictHostKeyChecking=no toto@Depot.technobrain.com:~/keycloak-25.0.1.zip ./
+sshpass -p toto scp -o StrictHostKeyChecking=no toto@Depot.technobrain.com:~/keycloak-25.0.1.zip ./
 unzip keycloak-25.0.1.zip
 
 cd /opt
@@ -32,10 +32,10 @@ chmod o+x /opt/keycloak/keycloak-25.0.1/bin/
 dnf -y install java-21-openjdk
 
 ############ configuration de mariadb ###############
-sshpass -p ${password_toto} ssh -o StrictHostKeyChecking=no -T toto@BDD1 << 'EOF1'
+sshpass -p toto ssh -o StrictHostKeyChecking=no -T toto@BDD1 << 'EOF1'
 mysql -u root -p${root_pass_mysql} << 'EOF2'
 CREATE DATABASE keycloak;
-GRANT ALL ON keycloak.* TO keycloak@'%' identified by '${password_base_keycloak}';
+GRANT ALL ON keycloak.* TO keycloak@'%' identified by 'Keycloak-96';
 flush privileges;
 exit
 EOF2
@@ -44,14 +44,14 @@ EOF1
 
 #openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout /opt/keycloak/keycloak-25.0.1/conf/server.key.pem -out /opt/keycloak/keycloak-25.0.1/conf/server.crt.pem
 
-sshpass -p ${password_toto} scp toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/keycloak/server.key.pem /opt/keycloak/keycloak-25.0.1/conf/
-sshpass -p ${password_toto} scp toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/keycloak/server.crt.pem /opt/keycloak/keycloak-25.0.1/conf/
+sshpass -p toto scp toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/keycloak/server.key.pem /opt/keycloak/keycloak-25.0.1/conf/
+sshpass -p toto scp toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/keycloak/server.crt.pem /opt/keycloak/keycloak-25.0.1/conf/
 
 chown keycloak. /opt/keycloak/keycloak-25.0.1/conf/server*
 
 #vim /opt/keycloak/keycloak-25.0.1/conf/keycloak.conf
 mv /opt/keycloak/keycloak-25.0.1/conf/keycloak.conf /opt/keycloak/keycloak-25.0.1/conf/keycloak.conf.old
-sshpass -p ${password_toto} scp toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/keycloak/keycloak.conf /opt/keycloak/keycloak-25.0.1/conf/
+sshpass -p toto scp toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/keycloak/keycloak.conf /opt/keycloak/keycloak-25.0.1/conf/
 
 firewall-cmd --permanent --zone=public --add-port=8443/tcp
 firewall-cmd --reload
@@ -60,7 +60,7 @@ firewall-cmd --reload
 /opt/keycloak/keycloak-25.0.1/bin/kc.sh build
 #/opt/keycloak/keycloak-25.0.1/bin/kc.sh start
 
-sshpass -p ${password_toto} scp toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/keycloak/keycloak.service /etc/systemd/system/
+sshpass -p toto scp toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/keycloak/keycloak.service /etc/systemd/system/
 
 systemctl daemon-reload
 systemctl start keycloak
