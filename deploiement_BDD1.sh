@@ -15,28 +15,18 @@ mv /home/toto/*.repo /etc/yum.repos.d/
 
 dnf update -y
 dnf install -y sshpass
-dnf install -y mariadb-server-galera
+dnf install -y mariadb-server
 
-mv /etc/my.cnf.d/galera.cnf /etc/my.cnf.d/galera.cnf.old
+#mv /etc/my.cnf.d/galera.cnf /etc/my.cnf.d/galera.cnf.old
 sshpass -p toto scp -o StrictHostKeyChecking=no toto@Depot.technobrain.com:~/Mariadb-galera-maxscale/conf/BDD1/galera.cnf /etc/my.cnf.d/
 
 galera_new_cluster
 
 systemctl enable --now mariadb.service
 
-mysql_secure_installation << EOF
-
-n
-y
-Spart-08
-Spart-08
-y
-y
-y
-y
-EOF
-
 mysql -u root -plol << EOF
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'Spart-08';
+FLUSH PRIVILEGES;
 show global status like 'wsrep_cluster_size';
 exit
 EOF

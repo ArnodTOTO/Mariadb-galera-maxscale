@@ -19,15 +19,13 @@ dnf install -y yum-utils createrepo
 
 
 ########## download repos galera #########
+wget https://dlm.mariadb.com/3820095/MariaDB/mariadb-11.2.4/yum/rhel/mariadb-11.2.4-rhel-9-x86_64-rpms.tar
+tar xvf mariadb-11.2.4-rhel-9-x86_64-rpms.tar
+cd mariadb-11.2.4-rhel-9-x86_64-rpms/
+./setup_repository
+cd ../
 mkdir repos
 cd repos
-mkdir mariadb-galera-server
-cd mariadb-galera-server
-repotrack --downloaddir=$PWD mariadb-server-galera
-createrepo $PWD
-
-########## download repos mariadb #########
-cd ../
 mkdir mariadb-server
 cd mariadb-server
 repotrack --downloaddir=$PWD mariadb-server
