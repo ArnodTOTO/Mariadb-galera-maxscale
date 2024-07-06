@@ -38,21 +38,28 @@ EOF
 cd /home/toto/
 sshpass -p ${password_root} scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/deploiement_BDD1.sh root@BDD1:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/private/* root@BDD1:~/
+sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env/env_password_BDD root@BDD1:~/
 
 
 sshpass -p ${password_root} scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/compl-BDD2.sh root@BDD2:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/private/* root@BDD2:~/
+sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env/env_password_BDD root@BDD2:~/
+
 
 sshpass -p ${password_root} scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/compl-BDD3.sh root@BDD3:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/private/* root@BDD3:~/
+sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env/env_password_BDD root@BDD3:~/
+
 
 sshpass -p ${password_root} scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/maxscale.sh root@maxscale:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/private/* root@maxscale:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/maxscale/* root@maxscale:~/
+sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env/env_password_maxscale root@maxscale:~/
 
 sshpass -p ${password_root} scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/keycloak.sh root@keycloak:~/
 sshpass -p ${password_root} scp  Mariadb-galera-maxscale/private/* root@keycloak:~/
-sshpass -p ${password_root} scp  Mariadb-galera-maxscale/keycloak/* root@maxscale:~/
+sshpass -p ${password_root} scp  Mariadb-galera-maxscale/keycloak/* root@keycloak:~/
+sshpass -p ${password_root} scp  Mariadb-galera-maxscale/env_password_keycloak root@keycloak:~/
 
 #cd repos/
 #systemctl stop firewalld.service
@@ -95,7 +102,7 @@ chmod +x ~/maxscale.sh
 exit
 EOF
 
-############## launch BDD2 ###############
+############## launch keycloak ###############
 sshpass -p ${password_root} ssh -o StrictHostKeyChecking=no root@keycloak << EOF
 chmod 600 private_key.pem
 cd /home/toto
