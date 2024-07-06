@@ -34,7 +34,7 @@ type=service
 router=readwritesplit
 servers=BDD1,BDD2,BDD3
 user=maxscale
-password=123
+password=Maxadmin-69
 
 [Galera-Listener]
 type=listener
