@@ -15,59 +15,8 @@ echo "10.10.10.200 Depot Depot.technobrain.com" >> /etc/hosts
 
 ############ Install repos server ###############
 dnf update -y
-dnf install -y yum-utils createrepo
-
-
-########## download repos galera #########
-wget https://dlm.mariadb.com/3820095/MariaDB/mariadb-11.2.4/yum/rhel/mariadb-11.2.4-rhel-9-x86_64-rpms.tar
-tar xvf mariadb-11.2.4-rhel-9-x86_64-rpms.tar
-cd mariadb-11.2.4-rhel-9-x86_64-rpms/
-./setup_repository
-cd ../
-mkdir repos
-cd repos
-mkdir mariadb-server
-cd mariadb-server
-repotrack --downloaddir=$PWD mariadb-server
-createrepo $PWD
-
-######### download repos mysql-selinux #######
-cd ../
-mkdir mysql-selinux
-cd mysql-selinux
-repotrack --downloaddir=$PWD mysql-selinux
-createrepo $PWD
-
-######### download repos java-21-openjdk #######
-cd ../
-mkdir java-21-openjdk
-cd java-21-openjdk
-repotrack --downloaddir=$PWD java-21-openjdk
-createrepo $PWD
-
-######### download repos java-21-openjdk #######
-cd ../
-mkdir sshpass
-cd sshpass
-repotrack --downloaddir=$PWD sshpass
-createrepo $PWD
-
-
-######### download mariadb-tools #######
-curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | bash
-cd ../
-mkdir maxscale
-cd maxscale
-repotrack --downloaddir=$PWD maxscale
-createrepo $PWD
-
-
+#dnf install -y yum-utils createrepo
 dnf install -y sshpass
-#sshpass -p root ssh -o StrictHostKeyChecking=no root@BDD1 << EOF
-#mkdir -p /etc/yum.repos.d/old
-#mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/old/
-#exit
-#EOF
 
 ############# download conf #################
 
@@ -79,25 +28,20 @@ EOF
 
 ######## Create http server in python ######## 
 cd /home/toto/
-sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@BDD1:~/
-sshpass -p toto scp Mariadb-galera-maxscale/deploiement_BDD1.sh toto@BDD1:~/
+sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/deploiement_BDD1.sh toto@BDD1:~/
 
-sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@BDD2:~/
-sshpass -p toto scp Mariadb-galera-maxscale/compl-BDD2.sh toto@BDD2:~/
+sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/compl-BDD2.sh toto@BDD2:~/
 
-sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@BDD3:~/
-sshpass -p toto scp Mariadb-galera-maxscale/compl-BDD3.sh toto@BDD3:~/
+sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/compl-BDD3.sh toto@BDD3:~/
 
-sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@maxscale:~/
-sshpass -p toto scp Mariadb-galera-maxscale/maxscale.sh toto@maxscale:~/
+sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/maxscale.sh toto@maxscale:~/
 
-sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/repos/* toto@keycloak:~/
-sshpass -p toto scp Mariadb-galera-maxscale/keycloak.sh toto@keycloak:~/
+sshpass -p toto scp -o StrictHostKeyChecking=no Mariadb-galera-maxscale/keycloak.sh toto@keycloak:~/
 
-cd repos/
-systemctl stop firewalld.service
-python3 -m http.server 8080 &
-sleep 2
+#cd repos/
+#systemctl stop firewalld.service
+#python3 -m http.server 8080 &
+#sleep 2
 
 ############## launch BDD1 ###############
 sshpass -p root ssh -o StrictHostKeyChecking=no root@BDD1 << EOF
