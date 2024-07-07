@@ -27,9 +27,19 @@ galera_new_cluster
 
 systemctl enable --now mariadb.service
 
+mysql_secure_installation << EOF
+
+n
+y
+${root_pass_msyql}
+${root_pass_msyql}
+y
+y
+y
+y
+EOF
+
 mysql -u root -plol << EOF
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${root_pass_msyql}';
-FLUSH PRIVILEGES;
 show global status like 'wsrep_cluster_size';
 exit
 EOF

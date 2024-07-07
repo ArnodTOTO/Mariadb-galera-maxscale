@@ -30,7 +30,7 @@ dnf install -y sshpass
 
 sshpass -p ${password_toto} ssh -o StrictHostKeyChecking=no toto@localhost << EOF
 wget https://github.com/keycloak/keycloak/releases/download/25.0.1/keycloak-25.0.1.zip
-wget https://dlm.mariadb.com/3820095/MariaDB/mariadb-11.2.4/yum/rhel/mariadb-11.2.4-rhel-9-x86_64-rpms.tar
+wget https://dlm.mariadb.com/3787399/MariaDB/mariadb-10.5.25/yum/rhel/mariadb-10.5.25-rhel-9-x86_64-rpms.tar
 exit
 EOF
 

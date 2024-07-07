@@ -33,7 +33,7 @@ dnf -y install java-21-openjdk
 
 ############ configuration de mariadb ###############
 sshpass -p toto ssh -o StrictHostKeyChecking=no -T toto@BDD1 << 'EOF1'
-mysql -u root -p${root_pass_mysql} << 'EOF2'
+mysql -u root -pMySQL69 << 'EOF2'
 CREATE DATABASE keycloak;
 GRANT ALL ON keycloak.* TO keycloak@'%' identified by 'Keycloak-96';
 flush privileges;
