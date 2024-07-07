@@ -14,9 +14,9 @@ firewall-cmd --reload
 
 dnf update -y
 dnf install -y sshpass
-sshpass -p ${password_toto} scp -o StrictHostKeyChecking=no toto@Depot.technobrain.com:~/mariadb-11.2.4-rhel-9-x86_64-rpms.tar ./
-tar xvf mariadb-11.2.4-rhel-9-x86_64-rpms.tar 
-cd mariadb-11.2.4-rhel-9-x86_64-rpms/
+sshpass -p ${password_toto} scp -o StrictHostKeyChecking=no toto@Depot.technobrain.com:~/mariadb-10.5.25-rhel-9-x86_64-rpms.tar ./
+tar xvf mariadb-10.5.25-rhel-9-x86_64-rpms.tar 
+cd mariadb-10.5.25-rhel-9-x86_64-rpms/
 ./setup_repository
 
 dnf install -y mariadb-server
